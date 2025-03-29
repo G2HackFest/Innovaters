@@ -14,8 +14,6 @@ import requests
 # flask app
 app = Flask(__name__)
 
-
-
 # load databasedataset===================================
 sym_des = pd.read_csv("datasets/symtoms_df.csv")
 precautions = pd.read_csv("datasets/precautions_df.csv")
@@ -24,10 +22,8 @@ description = pd.read_csv("datasets/description.csv")
 medications = pd.read_csv('datasets/medications.csv')
 diets = pd.read_csv("datasets/diets.csv")
 
-
 # load model===========================================
 svc = pickle.load(open('models/svc.pkl','rb'))
-
 
 #============================================================
 # custome and helping functions
@@ -60,17 +56,11 @@ def get_predicted_value(patient_symptoms):
         input_vector[symptoms_dict[item]] = 1
     return diseases_list[svc.predict([input_vector])[0]]
 
-
-
-
 # creating routes========================================
-
-
 
 @app.route('/')
 def index2():
     return render_template("index.html")
-
 
 @app.route("/index2")
 def index():
@@ -141,20 +131,7 @@ def fillData():
     return render_template("index.js")
 
 
-
-
-
-
-
-
 if __name__ == '__main__':
 
     app.run(debug=True)
     # app.run(host="10.2.7.5", port=5000, debug=True)
-
-
-
-
-
-
-
